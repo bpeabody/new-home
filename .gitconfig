@@ -1,0 +1,19 @@
+[user]
+    name = Brock Peabody
+    email = brock.peabody@gmail.com
+[color]
+    branch = auto
+    diff = auto
+    interactive = auto
+    status = auto
+[core]
+    excludesfile = ~/common_home/gitignore
+    eol = native
+[alias]
+    co = checkout
+    com = commit
+    st = status
+    br = branch
+    pull = pull --ff-only
+[credential]
+	helper = osxkeychain
