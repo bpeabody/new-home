@@ -7,7 +7,7 @@
     interactive = auto
     status = auto
 [core]
-    excludesfile = ~/common_home/gitignore
+    excludesfile = ~/.gitignore
     eol = native
 [alias]
     co = checkout
