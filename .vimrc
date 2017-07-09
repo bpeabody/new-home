@@ -153,7 +153,7 @@ let s:unite_source = {
 " This function just returns the result of 'list-files' mapped into the
 " required structure; 'args' and 'context' are ignored for now.
 function! s:unite_source.gather_candidates(args, context)
-    let filelist = split(system('list-files'), "\n")
+    let filelist = split(system('git ls-files'), "\n")
     return map(filelist, '{
           \ "word": v:val,
           \ "source": "filelist",
