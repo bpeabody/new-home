@@ -5,6 +5,7 @@ export GIT_SSL_NO_VERIFY=1
 
 export PS1='\!:\W$ '
 export PROMPT_COMMAND='history -a'
+export PATH=~/bin:$PATH
 
 shopt -s cdspell
 
