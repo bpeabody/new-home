@@ -144,16 +144,14 @@ call unite#custom#profile('default', 'context', {
 \   'no_split': 1,
 \ })
 
-" define a new source, 'listfiles' that calls my 'list-files' script
-let s:unite_source = {
-            \ 'name': 'listfiles',
-            \ 'is_volatile': 0
-            \ }
-
-" This function just returns the result of 'list-files' mapped into the
-" required structure; 'args' and 'context' are ignored for now.
-function! s:unite_source.gather_candidates(args, context)
-    let filelist = split(system('git ls-files'), "\n")
+" This function just returns the result of 'ls-files' mapped into the
+" required structure.  If the command was 'listfiles', use simple
+" 'git-ls-files'; otherwise, use 'git-meta-ls-files'.
+function! s:gather_candidates(args, context)
+    let command = "listfiles" == a:context.source_name ?
+                \ "git ls-files" :
+                \ "git meta ls-files"
+    let filelist = split(system(command), "\n")
     return map(filelist, '{
           \ "word": v:val,
           \ "source": "filelist",
@@ -162,9 +160,34 @@ function! s:unite_source.gather_candidates(args, context)
           \ }')
 endfunction
 
-call unite#define_source(s:unite_source)
+
+" define a new source, 'listfiles' for listing just the current repo
+let s:unite_source_local = {
+            \ 'name': 'listfiles',
+            \ 'is_volatile': 0,
+            \ }
+
+function! s:unite_source_local.gather_candidates(args, context)
+    return s:gather_candidates(a:args, a:context)
+endfunction
+
+call unite#define_source(s:unite_source_local)
 
 nnoremap <C-p> :Unite listfiles:!<cr>
+
+" define a new source, 'listallfiles' that calls lists files in sub-repos too.
+let s:unite_source_all = {
+            \ 'name': 'listallfiles',
+            \ 'is_volatile': 0
+            \ }
+
+function! s:unite_source_all.gather_candidates(args, context)
+    return s:gather_candidates(a:args, a:context)
+endfunction
+
+call unite#define_source(s:unite_source_all)
+
+nnoremap <C-o> :Unite listallfiles:!<cr>
 
 " Syntastic support broken for non-trivial swift usage, so disable it
 let g:syntastic_swift_checkers = []
