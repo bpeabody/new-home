@@ -72,3 +72,9 @@ __pycache__
 *.pyc
 .config/
 .bash_sessions/
+.node-gyp/
+.node_repl_history
+.ssh
+Applications/
+WindowsSupport/
+video/
