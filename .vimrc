@@ -26,6 +26,9 @@ Plugin 'brendonrapp/smyck-vim'
 call vundle#end()            " required
 filetype plugin indent on    " required
 
+" allow reasonable pasting into VIM from clipboard
+set paste
+
 set nocp
 set hidden
 let mapleader = ","
@@ -146,7 +149,7 @@ call unite#custom#profile('default', 'context', {
 
 " This function just returns the result of 'ls-files' mapped into the
 " required structure.  If the command was 'listfiles', use simple
-" 'git-ls-files'; otherwise, use 'git-meta-ls-files'.
+" 'git-ls-files'; otherwise, use 'git-ls-files --recurse-submodules'.
 function! s:gather_candidates(args, context)
     let command = "listfiles" == a:context.source_name ?
                 \ "git ls-files" :
