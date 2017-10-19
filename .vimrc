@@ -27,9 +27,6 @@ Plugin 'NLKNguyen/papercolor-theme'
 call vundle#end()            " required
 filetype plugin indent on    " required
 
-" allow reasonable pasting into VIM from clipboard
-set paste
-
 set nocp
 set hidden
 let mapleader = ","
