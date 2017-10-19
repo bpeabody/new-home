@@ -54,7 +54,7 @@ map - <C-W>-
 map + <C-W>+
 
 set background=dark
-colorscheme smyck
+colorscheme PaperColor
 
 syntax on " syntax coloring
 
