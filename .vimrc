@@ -22,6 +22,7 @@ Plugin 'Shougo/unite.vim'
 Plugin 'Keithbsmiley/swift.vim'
 Plugin 'benmills/vimux'
 Plugin 'brendonrapp/smyck-vim'
+Plugin 'NLKNguyen/papercolor-theme'
 
 call vundle#end()            " required
 filetype plugin indent on    " required
