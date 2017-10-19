@@ -23,6 +23,7 @@ Plugin 'Keithbsmiley/swift.vim'
 Plugin 'benmills/vimux'
 Plugin 'brendonrapp/smyck-vim'
 Plugin 'NLKNguyen/papercolor-theme'
+Plugin 'altercation/vim-colors-solarized'
 
 call vundle#end()            " required
 filetype plugin indent on    " required
