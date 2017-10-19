@@ -17,4 +17,4 @@ shopt -s histappend
 stty -ixon
 
 alias more=less
-alias tmux=tmux -2  # needed to get tmux to allow 256 colors
+alias tmux="tmux -2"  # needed to get tmux to allow 256 colors
