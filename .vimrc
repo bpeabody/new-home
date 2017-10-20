@@ -24,6 +24,7 @@ Plugin 'benmills/vimux'
 Plugin 'brendonrapp/smyck-vim'
 Plugin 'NLKNguyen/papercolor-theme'
 Plugin 'altercation/vim-colors-solarized'
+Plugin 'morhetz/gruvbox'
 
 call vundle#end()            " required
 filetype plugin indent on    " required
