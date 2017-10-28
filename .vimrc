@@ -192,5 +192,4 @@ call unite#define_source(s:unite_source_all)
 
 nnoremap <C-o> :Unite listallfiles:!<cr>
 
-" Syntastic support broken for non-trivial swift usage, so disable it
-let g:syntastic_swift_checkers = []
+let g:syntastic_swift_checkers = ["swiftlint"]
