@@ -123,6 +123,13 @@ endfunction
 
 autocmd FileType markdown call InitForText()
 
+function! InitForSwift()
+    setlocal shiftwidth=2
+    setlocal tabstop=2
+endfunction
+
+autocmd FileType swift call InitForSwift()
+
 autocmd FileType text call InitForText()
 autocmd FileType txt call InitForText()
 
