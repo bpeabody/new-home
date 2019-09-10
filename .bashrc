@@ -3,9 +3,9 @@ export HISTSIZE=100000
 export HISTFILESIZE=100000
 export GIT_SSL_NO_VERIFY=1
 
-export PS1='\!:\W$ '
+export PS1="\[\e[32m\]\h\[\e[m\]:\[\e[36m\]\w\[\e[m\]$ "
 export PROMPT_COMMAND='history -a'
-export PATH=~/bin:$PATH
+export PATH=~/local/bin:~/bin:$PATH
 
 shopt -s cdspell
 
@@ -18,3 +18,6 @@ stty -ixon
 
 alias more=less
 alias tmux="tmux -2"  # needed to get tmux to allow 256 colors
+
+eval "$(pyenv init -)"
+export DISPLAY=:0.0
