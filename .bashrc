@@ -5,7 +5,7 @@ export GIT_SSL_NO_VERIFY=1
 
 export PS1="\[\e[32m\]\h\[\e[m\]:\[\e[36m\]\w\[\e[m\]$ "
 export PROMPT_COMMAND='history -a'
-export PATH=~/local/bin:~/bin:$PATH
+export PATH=~/local/bin:~/bin:$PATH:/opt/homebrew/bin
 
 shopt -s cdspell
 
