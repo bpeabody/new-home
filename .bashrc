@@ -19,5 +19,4 @@ stty -ixon
 alias more=less
 alias tmux="tmux -2"  # needed to get tmux to allow 256 colors
 
-eval "$(pyenv init -)"
 export DISPLAY=:0.0
