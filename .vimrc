@@ -183,7 +183,16 @@ endfunction
 
 call unite#define_source(s:unite_source_local)
 
-nnoremap <C-p> :Unite listfiles:!<cr>
+" Goal is to show files from repo of currently edited file
+" 1. change to cwd of edited file
+" 2. change to root of its git directory
+" 3. call unite
+" eventually might like to show files from all git repos of all edited files
+function! ListFiles()
+    :cd %:p:h | :cd `git rev-parse --show-toplevel` | :Unite listfiles
+endfunction
+
+nnoremap <C-p> :call ListFiles()<CR>
 
 " define a new source, 'listallfiles' that calls lists files in sub-repos too.
 let s:unite_source_all = {
