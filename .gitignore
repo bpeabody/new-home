@@ -70,7 +70,6 @@ Pictures/
 Public/
 __pycache__
 *.pyc
-.config/
 .bash_sessions/
 .node-gyp/
 .node_repl_history
