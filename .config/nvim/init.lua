@@ -25,8 +25,6 @@ vim.api.nvim_set_keymap('n', '+', '<C-W>+', {})
 vim.api.nvim_set_keymap('n', '<leader>v', ':silent :nohlsearch<CR>', { silent = true })
 vim.api.nvim_set_keymap('n', '<leader>cd', ':cd %:p:h<CR>', {})
 vim.api.nvim_set_keymap('n', '<leader>s', ':set nolist!<CR>', { silent = true })
-vim.api.nvim_set_keymap('n', '<C-e>', '3<C-e>', {})
-vim.api.nvim_set_keymap('n', '<C-y>', '3<C-y>', {})
 vim.api.nvim_set_keymap('n', '<C-s>', ':wa<CR>', {})
 vim.api.nvim_set_keymap('i', '<C-s>', '<esc>:wa<CR>', {})
 vim.api.nvim_set_keymap('n', '<leader>o', ':A<CR>', {})
@@ -43,10 +41,6 @@ vim.opt.wildmode = { 'list', 'longest' }
 
 -- Intuitive backspacing in insert mode
 vim.opt.backspace = { 'indent', 'eol', 'start' }
-
--- Scroll settings
-vim.api.nvim_set_keymap('n', '<C-e>', '3<C-e>', {})
-vim.api.nvim_set_keymap('n', '<C-y>', '3<C-y>', {})
 
 -- Plugin manager (see nvim/lua/plugins.lua)
 require('plugins')
