@@ -29,7 +29,7 @@ Plugin 'morhetz/gruvbox'
 call vundle#end()            " required
 filetype plugin indent on    " required
 
-set nocp
+set nocp           " not vi compatible
 set hidden
 let mapleader = ","
 
