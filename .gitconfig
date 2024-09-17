@@ -17,3 +17,5 @@
     pull = pull --ff-only
 [credential]
 	helper = osxkeychain
+[submodule]
+	recurse = true
