@@ -19,4 +19,13 @@ return require('packer').startup(function(use)
     end,
   }
 
+
+  -- the next three need to be installed in that order
+
+  use {
+    "williamboman/mason.nvim",
+    "williamboman/mason-lspconfig.nvim",
+    "neovim/nvim-lspconfig",
+  }
+
 end)
