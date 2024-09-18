@@ -23,3 +23,6 @@ alias tmux="tmux -2"  # needed to get tmux to allow 256 colors
 
 export DISPLAY=:0.0
 . "$HOME/.cargo/env"
+
+export LANG=en_US.UTF-8
+export LC_ALL=en_US.UTF-8

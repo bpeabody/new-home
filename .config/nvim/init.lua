@@ -126,3 +126,5 @@ require("mason-lspconfig").setup { ensure_installed = { "pyright", }, }
   require 'lspconfig'.pyright.setup {
     capabilities = capabilities
   }
+
+  require('lualine').setup()
