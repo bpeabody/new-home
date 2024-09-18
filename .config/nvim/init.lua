@@ -19,6 +19,9 @@ vim.opt.scrolloff = 3           -- keep some context when scrolling
 -- Leader key
 vim.g.mapleader = ','
 
+-- easymotion
+vim.g.EasyMotion_leader_key = '<Leader>'
+
 -- Key mappings
 vim.api.nvim_set_keymap('n', '-', '<C-W>-', {})
 vim.api.nvim_set_keymap('n', '+', '<C-W>+', {})
