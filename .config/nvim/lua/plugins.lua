@@ -19,13 +19,39 @@ return require('packer').startup(function(use)
     end,
   }
 
-
-  -- the next three need to be installed in that order
-
   use {
     "williamboman/mason.nvim",
     "williamboman/mason-lspconfig.nvim",
     "neovim/nvim-lspconfig",
   }
+
+  use {
+    "hrsh7th/cmp-nvim-lsp",
+    "hrsh7th/cmp-buffer",
+    "hrsh7th/cmp-path",
+    "hrsh7th/cmp-cmdline",
+    "hrsh7th/nvim-cmp",
+  }
+
+  use {
+    "hrsh7th/cmp-vsnip",
+    "hrsh7th/vim-vsnip",
+  }
+
+-- " For vsnip users.
+-- Plug 'hrsh7th/cmp-vsnip'
+-- Plug 'hrsh7th/vim-vsnip'
+-- 
+-- " For luasnip users.
+-- " Plug 'L3MON4D3/LuaSnip'
+-- " Plug 'saadparwaiz1/cmp_luasnip'
+-- 
+-- " For ultisnips users.
+-- " Plug 'SirVer/ultisnips'
+-- " Plug 'quangnguyen30192/cmp-nvim-ultisnips'
+-- 
+-- " For snippy users.
+-- " Plug 'dcampos/nvim-snippy'
+-- " Plug 'dcampos/cmp-snippy'
 
 end)
