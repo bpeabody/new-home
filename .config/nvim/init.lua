@@ -21,8 +21,8 @@ vim.api.nvim_set_keymap('n', '<C-e>', '3<C-e>', { noremap = true, silent = true 
 -- Leader key
 vim.g.mapleader = ','
 
--- easymotion
-vim.g.EasyMotion_leader_key = '<Leader>'
+-- use s to repeat in sneak
+vim.g['sneak#s_next'] = 1
 
 -- Key mappings
 vim.api.nvim_set_keymap('n', '-', '<C-W>-', {})
@@ -198,3 +198,5 @@ require('copilot').setup({
   copilot_node_command = 'node', -- Node.js version must be > 18.x
   server_opts_overrides = {},
 })
+
+require("ibl").setup()  -- init and config indent-blankline plugin

@@ -55,7 +55,7 @@ return require('packer').startup(function(use)
   use "rebelot/kanagawa.nvim"
   use "rose-pine/neovim"
 
-  use "easymotion/vim-easymotion"
+  use "justinmk/vim-sneak"
 
   use {
     "windwp/nvim-autopairs",
@@ -82,4 +82,6 @@ return require('packer').startup(function(use)
   use 'mfussenegger/nvim-lint'
 
   use { "zbirenbaum/copilot.lua" }
+
+  use "lukas-reineke/indent-blankline.nvim"
 end)
