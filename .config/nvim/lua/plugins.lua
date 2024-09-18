@@ -47,4 +47,13 @@ return require('packer').startup(function(use)
     requires = { 'nvim-tree/nvim-web-devicons', opt = true }
   }
 
+
+  --color schemes
+  use 'ellisonleao/gruvbox.nvim'
+  use { "catppuccin/nvim", as = "catppuccin" }
+  use 'Mofiqul/dracula.nvim'
+  use "folke/tokyonight.nvim"
+  use "rebelot/kanagawa.nvim"
+  use "rose-pine/neovim"
+
 end)
