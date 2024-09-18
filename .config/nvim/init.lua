@@ -21,8 +21,8 @@ vim.api.nvim_set_keymap('n', '<C-e>', '3<C-e>', { noremap = true, silent = true 
 -- Leader key
 vim.g.mapleader = ','
 
--- use s to repeat in sneak
-vim.g['sneak#s_next'] = 1
+-- easymotion
+vim.g.EasyMotion_leader_key = '<Leader>'
 
 -- Key mappings
 vim.api.nvim_set_keymap('n', '-', '<C-W>-', {})

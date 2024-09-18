@@ -55,7 +55,7 @@ return require('packer').startup(function(use)
   use "rebelot/kanagawa.nvim"
   use "rose-pine/neovim"
 
-  use "justinmk/vim-sneak"
+  use "easymotion/vim-easymotion"
 
   use {
     "windwp/nvim-autopairs",
