@@ -16,6 +16,8 @@ vim.opt.incsearch = true        -- search as you type
 vim.opt.history = 1000          -- remember more history
 vim.opt.scrolloff = 3           -- keep some context when scrolling
 
+vim.api.nvim_set_keymap('n', '<C-e>', '3<C-e>', { noremap = true, silent = true })
+
 -- Leader key
 vim.g.mapleader = ','
 
