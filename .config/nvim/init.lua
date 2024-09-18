@@ -109,6 +109,13 @@ require('copilot').setup({
 -- completion
 local lspkind = require('lspkind')
 local cmp = require'cmp'
+
+-- Function to check if there's a word before the cursor
+local has_words_before = function()
+  local line, col = unpack(vim.api.nvim_win_get_cursor(0))
+  return col ~= 0 and vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match("%s") == nil
+end
+
 cmp.setup({
   snippet = {
     -- REQUIRED - you must specify a snippet engine
@@ -158,6 +165,32 @@ cmp.setup({
         return vim_item
       end
     })
+  },
+
+  mapping = {
+    -- Tab to navigate completion menu
+    ['<Tab>'] = cmp.mapping(function(fallback)
+      if cmp.visible() then
+        cmp.select_next_item()
+      elseif vim.fn  == 1 then
+        vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes("<Plug>(vsnip-expand-or-jump)", true, true, true), "", true)
+      elseif has_words_before() then
+        cmp.complete()
+      else
+        fallback()
+      end
+    end, { 'i', 's' }),
+
+    -- Shift-Tab to navigate backwards
+    ['<S-Tab>'] = cmp.mapping(function(fallback)
+      if cmp.visible() then
+        cmp.select_prev_item()
+      elseif vim.fn["vsnip#jumpable"](-1) == 1 then
+        vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes("<Plug>(vsnip-jump-prev)", true, true, true), "", true)
+      else
+        fallback()
+      end
+    end, { 'i', 's' }),
   },
 
   -- from: https://github.com/zbirenbaum/copilot-cmp on comparators
