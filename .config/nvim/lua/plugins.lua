@@ -38,6 +38,10 @@ return require('packer').startup(function(use)
     "hrsh7th/vim-vsnip",
   }
 
+  use {
+    "hrsh7th/cmp-nvim-lsp-signature-help",
+  }
+
 -- " For vsnip users.
 -- Plug 'hrsh7th/cmp-vsnip'
 -- Plug 'hrsh7th/vim-vsnip'
