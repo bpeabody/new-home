@@ -84,4 +84,15 @@ return require('packer').startup(function(use)
   use { "zbirenbaum/copilot.lua" }
 
   use "lukas-reineke/indent-blankline.nvim"
+
+  use {
+    "zbirenbaum/copilot-cmp",
+    after = { "copilot.lua" },
+    config = function ()
+      require("copilot_cmp").setup()
+    end
+  }
+
+  use "onsails/lspkind.nvim"
+
 end)

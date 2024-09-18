@@ -60,7 +60,54 @@ vim.api.nvim_set_keymap('n', '<leader>fh', '<cmd>Telescope help_tags<cr>', {})
 require("mason").setup {}
 require("mason-lspconfig").setup { ensure_installed = { "pyright", }, }
 
+-- must be configured before cmp
+require('copilot').setup({
+  panel = {
+    enabled = false,
+    auto_refresh = true,
+    keymap = {
+      jump_prev = "[[",
+      jump_next = "]]",
+      accept = "<CR>",
+      refresh = "gr",
+      open = "<M-CR>"
+    },
+    layout = {
+      position = "bottom", -- | top | left | right
+      ratio = 0.4
+    },
+  },
+  suggestion = {
+    enabled = false,
+    auto_trigger = true,
+    hide_during_completion = true,
+    debounce = 75,
+    keymap = {
+      accept = "<M-l>",
+      accept_word = false,
+      accept_line = false,
+      next = "<M-]>",
+      prev = "<M-[>",
+      dismiss = "<C-]>",
+    },
+  },
+  filetypes = {
+    yaml = false,
+    markdown = false,
+    help = false,
+    gitcommit = false,
+    gitrebase = false,
+    hgcommit = false,
+    svn = false,
+    cvs = false,
+    ["."] = false,
+  },
+  copilot_node_command = 'node', -- Node.js version must be > 18.x
+  server_opts_overrides = {},
+})
+
 -- completion
+local lspkind = require('lspkind')
 local cmp = require'cmp'
 cmp.setup({
   snippet = {
@@ -85,15 +132,61 @@ cmp.setup({
     ['<CR>'] = cmp.mapping.confirm({ select = true }), -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
   }),
   sources = cmp.config.sources({
-    { name = 'nvim_lsp' },
-    { name = 'nvim_lsp_signature_help' },
-    { name = 'vsnip' }, -- For vsnip users.
+    { name = "copilot", group_index = 2},
+    { name = 'nvim_lsp', group_index = 2 },
+    { name = 'nvim_lsp_signature_help', group_index = 2 },
+    { name = 'vsnip', group_index = 2 }, -- For vsnip users.
     -- { name = 'luasnip' }, -- For luasnip users.
     -- { name = 'ultisnips' }, -- For ultisnips users.
     -- { name = 'snippy' }, -- For snippy users.
   }, {
     { name = 'buffer' },
-  })
+  }),
+  formatting = {
+    format = lspkind.cmp_format({
+      mode = 'symbol', -- show only symbol annotations
+      symbol_map = { Copilot = "" },
+      maxwidth = 50, -- prevent the popup from showing more than provided characters (e.g 50 will not show more than 50 characters)
+                     -- can also be a function to dynamically calculate max width such as 
+                     -- maxwidth = function() return math.floor(0.45 * vim.o.columns) end,
+      ellipsis_char = '...', -- when popup menu exceed maxwidth, the truncated part would show ellipsis_char instead (must define maxwidth first)
+      show_labelDetails = true, -- show labelDetails in menu. Disabled by default
+
+      -- The function below will be called before any actual modifications from lspkind
+      -- so that you can provide more controls on popup customization. (See [#30](https://github.com/onsails/lspkind-nvim/pull/30))
+      before = function (entry, vim_item)
+        return vim_item
+      end
+    })
+  },
+
+  -- from: https://github.com/zbirenbaum/copilot-cmp on comparators
+  -- One custom comparitor for sorting cmp entries is provided: prioritize. The
+  -- prioritize comparitor causes copilot entries to appear higher in the cmp
+  -- menu. It is recommended keeping priority weight at 2, or placing the exact
+  -- comparitor above copilot so that better lsp matches are not stuck below
+  -- poor copilot matches.
+  --
+  -- for some reason I can't require copilot_cmp.comparators; will try again
+  -- later
+--  sorting = {
+--    priority_weight = 2,
+--    comparators = {
+--      require("copilot_cmp.comparators").prioritize,
+--
+--      -- Below is the default comparitor list and order for nvim-cmp
+--      cmp.config.compare.offset,
+--      -- cmp.config.compare.scopes, --this is commented in nvim-cmp too
+--      cmp.config.compare.exact,
+--      cmp.config.compare.score,
+--      cmp.config.compare.recently_used,
+--      cmp.config.compare.locality,
+--      cmp.config.compare.kind,
+--      cmp.config.compare.sort_text,
+--      cmp.config.compare.length,
+--      cmp.config.compare.order,
+--    },
+--  },
 })
 
 -- To use git you need to install the plugin petertriho/cmp-git and uncomment lines below
@@ -153,50 +246,5 @@ require('lint').linters_by_ft = {
   markdown = {'vale',},
   python = {'ruff', 'pylint'},
 }
-
-require('copilot').setup({
-  panel = {
-    enabled = true,
-    auto_refresh = true,
-    keymap = {
-      jump_prev = "[[",
-      jump_next = "]]",
-      accept = "<CR>",
-      refresh = "gr",
-      open = "<M-CR>"
-    },
-    layout = {
-      position = "bottom", -- | top | left | right
-      ratio = 0.4
-    },
-  },
-  suggestion = {
-    enabled = true,
-    auto_trigger = true,
-    hide_during_completion = true,
-    debounce = 75,
-    keymap = {
-      accept = "<M-l>",
-      accept_word = false,
-      accept_line = false,
-      next = "<M-]>",
-      prev = "<M-[>",
-      dismiss = "<C-]>",
-    },
-  },
-  filetypes = {
-    yaml = false,
-    markdown = false,
-    help = false,
-    gitcommit = false,
-    gitrebase = false,
-    hgcommit = false,
-    svn = false,
-    cvs = false,
-    ["."] = false,
-  },
-  copilot_node_command = 'node', -- Node.js version must be > 18.x
-  server_opts_overrides = {},
-})
 
 require("ibl").setup()  -- init and config indent-blankline plugin
