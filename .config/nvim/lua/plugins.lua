@@ -81,4 +81,5 @@ return require('packer').startup(function(use)
 
   use 'mfussenegger/nvim-lint'
 
+  use { "zbirenbaum/copilot.lua" }
 end)
