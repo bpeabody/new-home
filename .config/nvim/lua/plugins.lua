@@ -65,4 +65,20 @@ return require('packer').startup(function(use)
     end
   }
 
+  use "folke/trouble.nvim"  -- better diagnostic displays
+
+  use {
+    'numToStr/Comment.nvim',
+    config = function()
+        require('Comment').setup()
+    end
+  }
+
+  use 'mfussenegger/nvim-dap'  -- debugging support
+  use { "rcarriga/nvim-dap-ui", requires = {"mfussenegger/nvim-dap", "nvim-neotest/nvim-nio"} }
+
+  use "sindrets/diffview.nvim"
+
+  use 'mfussenegger/nvim-lint'
+
 end)

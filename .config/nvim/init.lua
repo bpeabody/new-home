@@ -148,3 +148,8 @@ vim.cmd([[colorscheme gruvbox]])
 -- vim.cmd("colorscheme rose-pine-main")
 -- vim.cmd("colorscheme rose-pine-moon")
 -- vim.cmd("colorscheme rose-pine-dawn")
+
+require('lint').linters_by_ft = {
+  markdown = {'vale',},
+  python = {'ruff', 'pylint'},
+}
