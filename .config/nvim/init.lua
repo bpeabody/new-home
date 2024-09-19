@@ -111,9 +111,16 @@ local lspkind = require('lspkind')
 local cmp = require'cmp'
 
 -- Function to check if there's a word before the cursor
+-- this is the version that's used w/o copilot; we need more sophistication
+--local has_words_before = function()
+--  local line, col = unpack(vim.api.nvim_win_get_cursor(0))
+--  return col ~= 0 and vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match("%s") == nil
+--end
+
 local has_words_before = function()
+  if vim.api.nvim_buf_get_option(0, "buftype") == "prompt" then return false end
   local line, col = unpack(vim.api.nvim_win_get_cursor(0))
-  return col ~= 0 and vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match("%s") == nil
+  return col ~= 0 and vim.api.nvim_buf_get_text(0, line-1, 0, line-1, col, {})[1]:match("^%s*$") == nil
 end
 
 cmp.setup({
@@ -139,7 +146,7 @@ cmp.setup({
     ['<CR>'] = cmp.mapping.confirm({ select = true }), -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
   }),
   sources = cmp.config.sources({
-    { name = "copilot", group_index = 2},
+    { name = "copilot", group_index = 3},
     { name = 'nvim_lsp', group_index = 2 },
     { name = 'nvim_lsp_signature_help', group_index = 2 },
     { name = 'vsnip', group_index = 2 }, -- For vsnip users.
@@ -168,6 +175,12 @@ cmp.setup({
   },
 
   mapping = {
+    -- Your mappings (e.g., <Tab> for selecting items)
+    ['<C-l>'] = cmp.mapping.complete(),
+    ['<CR>'] = cmp.mapping.confirm({ select = true }),
+    ['<C-n>'] = cmp.mapping(cmp.mapping.select_next_item(), { 'i', 'c' }),
+    ['<C-p>'] = cmp.mapping(cmp.mapping.select_prev_item(), { 'i', 'c' }),
+
     -- Tab to navigate completion menu
     ['<Tab>'] = cmp.mapping(function(fallback)
       if cmp.visible() then
@@ -192,7 +205,6 @@ cmp.setup({
       end
     end, { 'i', 's' }),
   },
-
   -- from: https://github.com/zbirenbaum/copilot-cmp on comparators
   -- One custom comparitor for sorting cmp entries is provided: prioritize. The
   -- prioritize comparitor causes copilot entries to appear higher in the cmp
@@ -279,5 +291,3 @@ require('lint').linters_by_ft = {
   markdown = {'vale',},
   python = {'ruff', 'pylint'},
 }
-
-require("ibl").setup()  -- init and config indent-blankline plugin
