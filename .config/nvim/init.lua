@@ -56,6 +56,30 @@ vim.api.nvim_set_keymap('n', '<leader>fg', '<cmd>Telescope live_grep<cr>', {})
 vim.api.nvim_set_keymap('n', '<leader>fb', '<cmd>Telescope buffers<cr>', {})
 vim.api.nvim_set_keymap('n', '<leader>fh', '<cmd>Telescope help_tags<cr>', {})
 
+local lsp_zero = require('lsp-zero')
+
+local lsp_attach = function(client, bufnr)
+  -- see :help lsp-zero-keybindings
+  -- to learn the available actions
+  lsp_zero.default_keymaps({buffer = bufnr})
+end
+
+lsp_zero.extend_lspconfig({
+  lsp_attach = lsp_attach,
+})
+
+-- Go to the next diagnostic (error, warning, etc.)
+vim.api.nvim_set_keymap('n', ']e', '<cmd>lua vim.diagnostic.goto_next()<CR>', { noremap = true, silent = true })
+-- Go to the previous diagnostic
+vim.api.nvim_set_keymap('n', '[e', '<cmd>lua vim.diagnostic.goto_prev()<CR>', { noremap = true, silent = true })
+-- show diagnostics error
+vim.api.nvim_set_keymap('n', 'Y', '<cmd>lua vim.diagnostic.open_float()<CR>', { noremap = true, silent = true })
+-- show list of errors
+vim.api.nvim_set_keymap('n', '<leader>q', '<cmd>lua vim.diagnostic.setloclist()<CR>', { noremap = true, silent = true })
+-- show code actions
+vim.api.nvim_set_keymap('n', '<leader>f', '<cmd>lua vim.lsp.buf.code_action()<CR>', { noremap = true, silent = true })
+
+
 -- language servers
 require("mason").setup {}
 require("mason-lspconfig").setup { ensure_installed = { "pyright", }, }
@@ -276,13 +300,13 @@ require('lualine').setup()
 
 -- vim.o.background = "dark" -- or "light" for light mode
 --
-vim.cmd([[colorscheme gruvbox]])
+-- vim.cmd([[colorscheme gruvbox]])
 -- vim.cmd.colorscheme "catppuccin"  -- catppuccin-latte, catppuccin-frappe, catppuccin-macchiato, catppuccin-mocha
 -- vim.cmd[[colorscheme dracula]]
 -- vim.cmd[[colorscheme dracula-soft]]
 -- vim.cmd[[colorscheme tokyonight]]
 -- vim.cmd("colorscheme kanagawa")
--- vim.cmd("colorscheme rose-pine")
+vim.cmd("colorscheme rose-pine")
 -- vim.cmd("colorscheme rose-pine-main")
 -- vim.cmd("colorscheme rose-pine-moon")
 -- vim.cmd("colorscheme rose-pine-dawn")
@@ -325,3 +349,28 @@ require("ibl").setup {
         show_end = true 
     },
 }
+
+vim.api.nvim_create_autocmd("QuickFixCmdPost", {
+  callback = function()
+    vim.cmd([[Trouble qflist open]])
+  end,
+})
+
+require("trouble").setup({
+  modes = {
+    preview_float = {
+      mode = "diagnostics",
+      preview = {
+        type = "float",
+        relative = "editor",
+        border = "rounded",
+        title = "Preview",
+        title_pos = "center",
+        position = { 0, -2 },
+        size = { width = 0.3, height = 0.3 },
+        zindex = 200,
+      },
+    },
+  },
+}
+)

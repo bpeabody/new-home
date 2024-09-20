@@ -99,4 +99,6 @@ return require('packer').startup(function(use)
 
   use "onsails/lspkind.nvim"
 
+  use "VonHeikemen/lsp-zero.nvim"
+
 end)
