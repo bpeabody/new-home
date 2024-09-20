@@ -1,104 +1,109 @@
--- This line is required to use Packer in this file
-vim.cmd [[packadd packer.nvim]]
+return {
+  -- Lazy itself
+  { 'folke/lazy.nvim' },
 
--- Initialize plugins
-return require('packer').startup(function(use)
-  -- Packer can manage itself
-  use 'wbthomason/packer.nvim'
+  -- Essential tools
+  { "BurntSushi/ripgrep" },
+  { "sharkdp/fd" },
 
-  use "BurntSushi/ripgrep"
-  use "sharkdp/fd"
-
-  use {
+  -- Treesitter with update hook
+  {
     'nvim-treesitter/nvim-treesitter',
-    run = function()
-        local ts_update = require('nvim-treesitter.install').update({ with_sync = true })
-        ts_update()
-    end,
-  }
+    build = function()
+      local ts_update = require('nvim-treesitter.install').update({ with_sync = true })
+      ts_update()
+    end
+  },
 
-
-  use {
+  -- Telescope with plenary dependency
+  {
     'nvim-telescope/telescope.nvim',
-    requires = { {'nvim-lua/plenary.nvim'} }
-  }
+    dependencies = { 'nvim-lua/plenary.nvim' }
+  },
 
-  use {
-    "williamboman/mason.nvim",
-    "williamboman/mason-lspconfig.nvim",
-    "neovim/nvim-lspconfig",
-  }
+  -- Mason, LSP, and LSPConfig
+  { "williamboman/mason.nvim" },
+  { "williamboman/mason-lspconfig.nvim" },
+  { "neovim/nvim-lspconfig" },
 
-  use {
-    "hrsh7th/cmp-nvim-lsp",
-    "hrsh7th/cmp-buffer",
-    "hrsh7th/cmp-path",
-    "hrsh7th/cmp-cmdline",
-    "hrsh7th/nvim-cmp",
-  }
+  -- nvim-cmp and its sources
+  { "hrsh7th/nvim-cmp" },
+  { "hrsh7th/cmp-nvim-lsp" },
+  { "hrsh7th/cmp-buffer" },
+  { "hrsh7th/cmp-path" },
+  { "hrsh7th/cmp-cmdline" },
 
-  use {
-    "hrsh7th/cmp-vsnip",
-    "hrsh7th/vim-vsnip",
-  }
+  -- Vsnip and its cmp integration
+  { "hrsh7th/cmp-vsnip" },
+  { "hrsh7th/vim-vsnip" },
 
-  use {
-    "hrsh7th/cmp-nvim-lsp-signature-help",
-  }
+  -- LSP signature help
+  { "hrsh7th/cmp-nvim-lsp-signature-help" },
 
-  use {
+  -- Lualine with optional devicons dependency
+  {
     "nvim-lualine/lualine.nvim",
-    requires = { 'nvim-tree/nvim-web-devicons', opt = true }
-  }
+    dependencies = { 'nvim-tree/nvim-web-devicons' },
+  },
 
-  --color schemes
-  use 'ellisonleao/gruvbox.nvim'
-  use { "catppuccin/nvim", as = "catppuccin" }
-  use 'Mofiqul/dracula.nvim'
-  use "folke/tokyonight.nvim"
-  use "rebelot/kanagawa.nvim"
-  use "rose-pine/neovim"
+  -- Color schemes
+  { "ellisonleao/gruvbox.nvim" },
+  { "catppuccin/nvim", name = "catppuccin" },
+  { "Mofiqul/dracula.nvim" },
+  { "folke/tokyonight.nvim" },
+  { "rebelot/kanagawa.nvim" },
+  { "rose-pine/neovim" },
 
-  use "easymotion/vim-easymotion"
+  -- EasyMotion
+  { "easymotion/vim-easymotion" },
 
-  use {
+  -- Auto pairs on InsertEnter event
+  {
     "windwp/nvim-autopairs",
     event = "InsertEnter",
     config = function()
-        require("nvim-autopairs").setup {}
+      require("nvim-autopairs").setup {}
     end
-  }
+  },
 
-  use "folke/trouble.nvim"  -- better diagnostic displays
+  -- Trouble for better diagnostics
+  { "folke/trouble.nvim" },
 
-  use {
+  -- Comment plugin with configuration
+  {
     'numToStr/Comment.nvim',
     config = function()
-        require('Comment').setup()
+      require('Comment').setup()
     end
-  }
+  },
 
-  use 'mfussenegger/nvim-dap'  -- debugging support
-  use { "rcarriga/nvim-dap-ui", requires = {"mfussenegger/nvim-dap", "nvim-neotest/nvim-nio"} }
+  -- Debugging support with nvim-dap and UI
+  { 'mfussenegger/nvim-dap' },
+  {
+    "rcarriga/nvim-dap-ui",
+    dependencies = { "mfussenegger/nvim-dap", "nvim-neotest/nvim-nio" }
+  },
 
-  use "sindrets/diffview.nvim"
+  -- Diffview for Git diffs
+  { "sindrets/diffview.nvim" },
 
-  use 'mfussenegger/nvim-lint'
+  -- Linting support
+  { 'mfussenegger/nvim-lint' },
 
-  use { "zbirenbaum/copilot.lua" }
-
-  use "lukas-reineke/indent-blankline.nvim"
-
-  use {
+  -- GitHub Copilot integration
+  { "zbirenbaum/copilot.lua" },
+  {
     "zbirenbaum/copilot-cmp",
-    after = { "copilot.lua" },
-    config = function ()
+    dependencies = { "copilot.lua" },
+    config = function()
       require("copilot_cmp").setup()
     end
-  }
+  },
 
-  use "onsails/lspkind.nvim"
+  -- LSP-related plugins
+  { "onsails/lspkind.nvim" },
+  { "VonHeikemen/lsp-zero.nvim" },
 
-  use "VonHeikemen/lsp-zero.nvim"
-
-end)
+  -- Indent guides
+  { "lukas-reineke/indent-blankline.nvim" }
+}

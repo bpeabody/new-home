@@ -24,6 +24,8 @@ vim.g.mapleader = ','
 -- easymotion
 vim.g.EasyMotion_leader_key = '<Leader>'
 
+require("config.lazy")
+
 -- Key mappings
 vim.api.nvim_set_keymap('n', '-', '<C-W>-', {})
 vim.api.nvim_set_keymap('n', '+', '<C-W>+', {})
