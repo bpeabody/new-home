@@ -52,6 +52,15 @@ vim.opt.backspace = { 'indent', 'eol', 'start' }
 -- Plugin manager (see nvim/lua/plugins.lua)
 require('plugins')
 
+require('telescope').setup{
+  pickers = {
+    find_files = {
+      -- Use git ls-files if inside a git repository
+      find_command = { 'git', 'ls-files' }
+    },
+  },
+}
+
 -- Telescope mappings
 vim.api.nvim_set_keymap('n', '<leader>ff', '<cmd>Telescope find_files<cr>', {})
 vim.api.nvim_set_keymap('n', '<leader>fg', '<cmd>Telescope live_grep<cr>', {})
