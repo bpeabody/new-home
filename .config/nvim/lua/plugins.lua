@@ -101,12 +101,13 @@ return {
   { "onsails/lspkind.nvim" },        -- icons on popups
   { "VonHeikemen/lsp-zero.nvim" },
 
+
   {
-      'ray-x/navigator.lua',
+      'nvimdev/lspsaga.nvim',
       dependencies = {
-          { 'ray-x/guihua.lua', build = 'cd lua/fzy && make' },
-          { 'neovim/nvim-lspconfig' },
-      },
+          'nvim-treesitter/nvim-treesitter', -- optional
+          'nvim-tree/nvim-web-devicons',     -- optional
+      }
   },
 
   -- Indent guides

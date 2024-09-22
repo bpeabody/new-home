@@ -400,6 +400,29 @@ vim.api.nvim_create_autocmd("BufWritePre", {
   end,
 })
 
+require('lspsaga').setup({
+  ui = {
+    border = 'rounded',
+  },
+  symbol_in_winbar = {
+    enable = true,
+  },
+})
+require("lspsaga.symbol.winbar").get_bar()
 
--- navigator
-require('navigator').setup()
+-- Custom key mappings
+vim.keymap.set('n', 'K', '<cmd>Lspsaga hover_doc<CR>', { silent = true })
+vim.keymap.set('n', 'gd', '<cmd>Lspsaga goto_definition<CR>', { silent = true })
+vim.keymap.set('n', 'gp', '<cmd>Lspsaga peek_definition<CR>', { silent = true })
+vim.keymap.set('n', 'gP', '<cmd>Lspsaga peek_type_definition<CR>', { silent = true })
+vim.keymap.set('n', 'gr', '<cmd>Lspsaga lsp_finder<CR>', { silent = true })
+vim.keymap.set('n', 'gl', '<cmd>Lspsaga show_line_diagnostics<CR>', { silent = true })
+vim.keymap.set('n', '[e', '<cmd>Lspsaga diagnostic_jump_prev<CR>', { silent = true })
+vim.keymap.set('n', ']e', '<cmd>Lspsaga diagnostic_jump_next<CR>', { silent = true })
+vim.keymap.set('n', '<leader>ca', '<cmd>Lspsaga code_action<CR>', { silent = true })
+vim.keymap.set('v', '<leader>ca', '<cmd>Lspsaga code_action<CR>', { silent = true })
+vim.keymap.set('n', '<leader>rn', '<cmd>Lspsaga rename<CR>', { silent = true })
+vim.keymap.set('n', '<leader>o', '<cmd>Lspsaga outline<CR>', { silent = true })
+vim.keymap.set('n', '<A-d>', '<cmd>Lspsaga term_toggle<CR>', { silent = true })
+
+
