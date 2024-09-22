@@ -305,17 +305,6 @@ require 'lspconfig'.pyright.setup {
   capabilities = capabilities
 }
 
-require('lspconfig').ruff_lsp.setup({
-    on_attach = function(client, bufnr)
-        -- Your on_attach function
-    end,
-    init_options = {
-        settings = {},
-    },
-})
-
-require('lspconfig').jedi_language_server.setup{}
-
 require('lualine').setup()
 
 -- colorschemes
@@ -470,7 +459,6 @@ local sources = {
     null_ls.builtins.completion.spell,
     null_ls.builtins.formatting.prettier,
     null_ls.builtins.diagnostics.write_good,
-    null_ls.builtins.code_actions.refactoring,
     null_ls.builtins.code_actions.gitsigns,
     require("none-ls.diagnostics.eslint"), -- requires none-ls-extras.nvim
 }

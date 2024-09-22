@@ -121,10 +121,6 @@ return {
   { "stevearc/aerial.nvim" },
 
   { "lewis6991/gitsigns.nvim"}, -- required for the below
-  {
-      "nvimtools/none-ls.nvim",
-      dependencies = { 'nvim-lua/plenary.nvim' },
-  },
-
+  { "nvimtools/none-ls.nvim" },
   { "nvimtools/none-ls-extras.nvim" },
 }
