@@ -87,9 +87,6 @@ return {
   -- Diffview for Git diffs
   { "sindrets/diffview.nvim" },
 
-  -- Linting support
-  { 'mfussenegger/nvim-lint' },
-
   -- GitHub Copilot integration
   { "zbirenbaum/copilot.lua" },
   {
@@ -101,9 +98,14 @@ return {
   },
 
   -- LSP-related plugins
-  { "onsails/lspkind.nvim" },
+  { "onsails/lspkind.nvim" },        -- icons on popups
   { "VonHeikemen/lsp-zero.nvim" },
 
   -- Indent guides
-  { "lukas-reineke/indent-blankline.nvim" }
+  { "lukas-reineke/indent-blankline.nvim" },
+
+  {
+    'stevearc/conform.nvim',
+    opts = {},
+  },
 }

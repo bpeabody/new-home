@@ -322,11 +322,6 @@ vim.cmd("colorscheme rose-pine")
 -- vim.cmd("colorscheme rose-pine-moon")
 -- vim.cmd("colorscheme rose-pine-dawn")
 
-require('lint').linters_by_ft = {
-  markdown = {'vale',},
-  python = {'ruff', 'pylint'},
-}
-
 local highlight = {
     "RainbowRed",
     "RainbowYellow",
@@ -385,3 +380,22 @@ require("trouble").setup({
   },
 }
 )
+
+require("conform").setup({
+  formatters_by_ft = {
+    lua = { "stylua" },
+    -- Conform will run multiple formatters sequentially
+    python = { "isort", "black" },
+    -- You can customize some of the format options for the filetype (:help conform.format)
+    rust = { "rustfmt", lsp_format = "fallback" },
+    -- Conform will run the first available formatter
+    javascript = { "prettierd", "prettier", stop_after_first = true },
+  },
+})
+
+vim.api.nvim_create_autocmd("BufWritePre", {
+  pattern = "*",
+  callback = function(args)
+    require("conform").format({ bufnr = args.buf })
+  end,
+})
