@@ -117,4 +117,7 @@ return {
     'stevearc/conform.nvim',
     opts = {},
   },
+
+  { "stevearc/aerial.nvim" },
+
 }
