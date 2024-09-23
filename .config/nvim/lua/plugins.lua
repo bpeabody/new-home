@@ -140,4 +140,51 @@ return {
     },
     config = true
   },
+
+  {
+    'lewis6991/gitsigns.nvim',
+    event = 'BufRead',
+    config = function()
+      require('gitsigns').setup({
+        signs = {
+          add = { text = '+' },
+          change = { text = '~' },
+          delete = { text = '_' },
+          topdelete = { text = '‾' },
+          changedelete = { text = '~' },
+        },
+        on_attach = function(bufnr)
+          local gs = package.loaded.gitsigns
+
+          -- Navigation
+          vim.keymap.set('n', ']c', function()
+            if vim.wo.diff then return ']c' end
+            vim.schedule(function() gs.next_hunk() end)
+            return '<Ignore>'
+          end, { expr = true, buffer = bufnr })
+
+          vim.keymap.set('n', '[c', function()
+            if vim.wo.diff then return '[c' end
+            vim.schedule(function() gs.prev_hunk() end)
+            return '<Ignore>'
+          end, { expr = true, buffer = bufnr })
+
+          -- Actions
+          vim.keymap.set('n', '<leader>ghs', gs.stage_hunk, { buffer = bufnr, desc = 'Stage Hunk' })
+          vim.keymap.set('n', '<leader>ghr', gs.reset_hunk, { buffer = bufnr, desc = 'Reset Hunk' })
+          vim.keymap.set('v', '<leader>ghs', function()
+            gs.stage_hunk({ vim.fn.line('.'), vim.fn.line('v') })
+          end, { buffer = bufnr, desc = 'Stage Selected Hunks' })
+          vim.keymap.set('v', '<leader>ghr', function()
+            gs.reset_hunk({ vim.fn.line('.'), vim.fn.line('v') })
+          end, { buffer = bufnr, desc = 'Reset Selected Hunks' })
+          vim.keymap.set('n', '<leader>ghp', gs.preview_hunk, { buffer = bufnr, desc = 'Preview Hunk' })
+          vim.keymap.set('n', '<leader>ghb', function()
+            gs.blame_line({ full = true })
+          end, { buffer = bufnr, desc = 'Blame Line' })
+          vim.keymap.set('n', '<leader>ghd', gs.diffthis, { buffer = bufnr, desc = 'Diff This' })
+        end,
+      })
+    end,
+  },
 }
