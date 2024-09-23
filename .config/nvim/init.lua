@@ -449,3 +449,15 @@ require("codecompanion").setup({
     },
   },
 })
+
+vim.api.nvim_set_keymap("n", "<C-i>", "<cmd>CodeCompanionActions<cr>", { noremap = true, silent = true })
+vim.api.nvim_set_keymap("v", "<C-i>", "<cmd>CodeCompanionActions<cr>", { noremap = true, silent = true })
+vim.api.nvim_set_keymap("n", "<LocalLeader>A", "<cmd>CodeCompanionToggle<cr>", { noremap = true, silent = true })
+vim.api.nvim_set_keymap("v", "<LocalLeader>A", "<cmd>CodeCompanionToggle<cr>", { noremap = true, silent = true })
+vim.api.nvim_set_keymap("n", "<C-p>", "<cmd>CodeCompanionToggle<cr>", { noremap = true, silent = true })
+vim.api.nvim_set_keymap("v", "<C-p>", "<cmd>CodeCompanionToggle<cr>", { noremap = true, silent = true })
+vim.api.nvim_set_keymap("i", "<C-p>", "<cmd>CodeCompanionToggle<cr>", { noremap = true, silent = true })
+vim.api.nvim_set_keymap("v", "ca", "<cmd>CodeCompanionAdd<cr>", { noremap = true, silent = true })
+
+-- Expand 'cc' into 'CodeCompanion' in the command line
+vim.cmd([[cab cc CodeCompanion]])
