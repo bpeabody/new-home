@@ -21,9 +21,6 @@ vim.api.nvim_set_keymap('n', '<C-e>', '3<C-e>', { noremap = true, silent = true 
 -- Leader key
 vim.g.mapleader = ','
 
--- easymotion
-vim.g.EasyMotion_leader_key = '<Leader>'
-
 require("config.lazy")
 
 -- Key mappings
@@ -461,3 +458,5 @@ vim.api.nvim_set_keymap("v", "ca", "<cmd>CodeCompanionAdd<cr>", { noremap = true
 
 -- Expand 'cc' into 'CodeCompanion' in the command line
 vim.cmd([[cab cc CodeCompanion]])
+
+require("leap").create_default_mappings()

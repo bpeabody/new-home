@@ -54,9 +54,6 @@ return {
   { "rebelot/kanagawa.nvim" },
   { "rose-pine/neovim" },
 
-  -- EasyMotion
-  { "easymotion/vim-easymotion" },
-
   -- Auto pairs on InsertEnter event
   {
     "windwp/nvim-autopairs",
@@ -187,4 +184,7 @@ return {
       })
     end,
   },
+
+  { "ggandor/leap.nvim" },
 }
+
