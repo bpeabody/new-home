@@ -26,6 +26,6 @@ export DISPLAY=:0.0
 
 export LANG=en_US.UTF-8
 export LC_ALL=en_US.UTF-8
-export OPEN_API_KEY=$(cat ~/.keys/ChatGPT.nvim.openai)
+export OPEN_API_KEY=$(cat ~/keys/ChatGPT.nvim.openai)
 
 export AWS_PROFILE=Developer-750096361451
