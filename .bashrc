@@ -7,7 +7,6 @@ export PS1="\[\e[32m\]\h\[\e[m\]:\[\e[36m\]\w\[\e[m\]$ "
 export PROMPT_COMMAND='history -a'
 export PATH=~/local/bin:~/bin:$PATH
 export PATH="/opt/homebrew/opt/gnu-sed/libexec/gnubin:$PATH"
-export EAI_ROOT=~/repos/eai/foundation
 
 shopt -s cdspell
 
@@ -22,10 +21,7 @@ alias more=less
 alias tmux="tmux -2"  # needed to get tmux to allow 256 colors
 
 export DISPLAY=:0.0
-. "$HOME/.cargo/env"
 
 export LANG=en_US.UTF-8
 export LC_ALL=en_US.UTF-8
 export OPEN_API_KEY=$(cat ~/keys/ChatGPT.nvim.openai)
-
-export AWS_PROFILE=Developer-750096361451
