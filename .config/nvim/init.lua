@@ -306,7 +306,7 @@ require('lualine').setup()
 
 -- colorschemes
 
--- vim.o.background = "dark" -- or "light" for light mode
+vim.o.background = "dark" -- or "light" for light mode
 --
 -- vim.cmd([[colorscheme gruvbox]])
 -- vim.cmd.colorscheme "catppuccin"  -- catppuccin-latte, catppuccin-frappe, catppuccin-macchiato, catppuccin-mocha
